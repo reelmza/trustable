@@ -1,4 +1,4 @@
-import SignInForm from "@/components/auth/SigninForm";
+import SignInForm from "@/components/auth/SignInForm";
 import GoogleButton from "@/components/auth/GoogleSignIn";
 
 const Signin = () => {
