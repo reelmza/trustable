@@ -8,6 +8,27 @@ generator client {
 }
 
 model trust {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  id               String  @id @default(auto()) @map("_id") @db.ObjectId
+  trustName        String
+  trustDescription String
+  trustFileHash    String
+  trustFileLink    String?
+
+  trustedPartyName      String?
+  trustedPartySignature String?
+
+  ownerId String
+
+  trustAccessCount Int @default(0) // Auto generated
+  trustViewCount   Int @default(0) // Auto generated
+
+  createdAt DateTime @default(now()) // Auto generated
+  updatedAt DateTime @updatedAt // Auto generated
+}
+
+model user {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  clerkId   String  @unique
+  firstName String?
+  lastName  String?
 }

@@ -67,6 +67,8 @@ export default function SignInForm() {
         </div>
         <button type="submit">Sign in</button>
       </form>
+
+      <div id="clerk-captcha" />
     </>
   );
 }

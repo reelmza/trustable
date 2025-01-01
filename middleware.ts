@@ -1,6 +1,10 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-const unprotectedRoute = createRouteMatcher(["/signin(.*)", "/signup(.*)"]);
+const unprotectedRoute = createRouteMatcher([
+  "/signin(.*)",
+  "/signup(.*)",
+  "/api/webhooks(.*)",
+]);
 
 export default clerkMiddleware(async (auth, req) => {
   // Redirect to signin if user is unauthenticated

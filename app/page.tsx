@@ -1,6 +1,7 @@
 "use client";
 import { SignOutButton } from "@clerk/nextjs";
 import prisma from "@/libs/PrismaClient";
+import Link from "next/link";
 
 export default function Home() {
   const testPrisma = async () => {
@@ -16,8 +17,13 @@ export default function Home() {
   };
   return (
     <>
+      <Link href="/create-trust">
+        <button>Create New Trust</button>
+      </Link>
+
+      <br />
+      <br />
       <SignOutButton />
-      <button onClick={testPrisma}>Test prisma database</button>
     </>
   );
 }

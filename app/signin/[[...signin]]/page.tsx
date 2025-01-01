@@ -1,5 +1,5 @@
 import SignInForm from "@/components/auth/SigninForm";
-import GoogleButton from "@/components/auth/GoogleButton";
+import GoogleButton from "@/components/auth/GoogleSignIn";
 
 const Signin = () => {
   return (
