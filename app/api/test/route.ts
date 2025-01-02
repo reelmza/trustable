@@ -1,4 +1,4 @@
-import prisma from "@/libs/PrismaClient";
+import prisma from "@/lib/PrismaClient";
 export const GET = async () => {
   try {
     const data = await prisma.trust.create({
