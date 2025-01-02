@@ -1,5 +1,5 @@
 import GoogleButton from "@/components/auth/GoogleSignUp";
-import SignUpForm from "@/components/auth/SignupForm";
+import SignUpForm from "@/components/auth/SignUpForm";
 import React from "react";
 
 const SignupPage = () => {

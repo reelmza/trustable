@@ -1,22 +1,25 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-const unprotectedRoute = createRouteMatcher([
-  "/signin(.*)",
-  "/signup(.*)",
-  "/api/webhooks(.*)",
+const protectedRoutes = createRouteMatcher([
+  "/dashboard(.*)",
+  "/create-trust",
+  "/profile",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  // Redirect to signin if user is unauthenticated
-  // and accesses protected page
-  if (!unprotectedRoute(req))
+  // Redirect to signin if user is not authenticated
+  if (protectedRoutes(req))
     await auth.protect({ unauthenticatedUrl: "http://localhost:3000/signin" });
 
-  // Redirect to homepage if unprotected pages are forcefully
-  // visited while user is authenticated
-  if (unprotectedRoute(req)) {
+  // Redirect to dashboard user loged in visits signin/signup page
+  if (!protectedRoutes(req)) {
     const { userId } = await auth();
-    if (userId) return NextResponse.redirect("http://localhost:3000");
+    const requestedPath = req.nextUrl.pathname;
+    const routesUnavailableOnAuth =
+      requestedPath === "/signin" || requestedPath === "/signup";
+
+    if (userId && routesUnavailableOnAuth)
+      return NextResponse.redirect("http://localhost:3000/dashboard");
   }
 });
 

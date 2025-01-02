@@ -14,7 +14,7 @@ export default function GoogleButton() {
     return signIn.authenticateWithRedirect({
       strategy,
       redirectUrl: "/signup/sso-callback",
-      redirectUrlComplete: "/",
+      redirectUrlComplete: "/dashboard",
     });
   };
 

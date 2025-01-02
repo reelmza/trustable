@@ -27,7 +27,7 @@ export default function SignInForm() {
       // and redirect the user
       if (signInAttempt.status === "complete") {
         await setActive({ session: signInAttempt.createdSessionId });
-        router.push("/");
+        router.push("/dashboard");
       } else {
         // If the status is not complete, check why. User may need to
         // complete further steps.

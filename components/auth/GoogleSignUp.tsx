@@ -14,7 +14,7 @@ export default function OauthSignIn() {
     return signUp.authenticateWithRedirect({
       strategy,
       redirectUrl: "/sign-up/sso-callback",
-      redirectUrlComplete: "/",
+      redirectUrlComplete: "/dashboard",
     });
   };
 
