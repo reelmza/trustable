@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import SideBar from "@/components/layout/SideBar";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -27,9 +28,12 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={"${geistSans.variable} ${geistMono.variable} antialiased`"}
+          className={
+            "relative h-full w-full bg-gray-50 flex ${geistSans.variable} ${geistMono.variable} antialiased`"
+          }
         >
-          {children}
+          <SideBar />
+          <div className="grow p-5">{children}</div>
         </body>
       </html>
     </ClerkProvider>

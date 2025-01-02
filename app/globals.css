@@ -14,11 +14,16 @@
   }
 }
 
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 input {
@@ -32,5 +37,4 @@ button {
 
 textarea {
   border: solid 1px #bebebe;
-
 }
