@@ -3,6 +3,12 @@
 import * as React from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import GoogleButton from "./GoogleSignIn";
+import ThemeSpacer from "../layout/ThemeSpacer";
+import Link from "next/link";
 
 export default function SignInForm() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -43,21 +49,54 @@ export default function SignInForm() {
   // Display a form to capture the user's email and password
   return (
     <>
-      <h1>Sign in</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form
+        onSubmit={handleSubmit}
+        className="w-full bg-white border p-5 rounded-md lg:shadow-sm"
+      >
+        {/* Form heading */}
+        <h3 className="font-semibold text-xl text-center">Welcome Back</h3>
+        <ThemeSpacer size="elements" />
+
+        {/* Form description */}
+        <p className="text-gray-600 text-center text-sm">
+          Login with your social account to proceed
+        </p>
+        <ThemeSpacer size="components" />
+
+        {/* Google sign in */}
+        <GoogleButton />
+        <ThemeSpacer size="components" />
+
+        {/* "Or sign-in" with separator */}
+        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+          <span className="relative z-10 bg-white text-gray-600 px-2">
+            Or continue with
+          </span>
+        </div>
+        <ThemeSpacer size="components" />
+
+        {/* Email input */}
         <div>
-          <label htmlFor="email">Enter email address</label>
-          <input
+          <Label htmlFor="email">Email</Label>
+          <ThemeSpacer size="elements" />
+
+          <Input
             onChange={(e) => setEmail(e.target.value)}
             id="email"
             name="email"
             type="email"
             value={email}
+            placeholder="you@gmail.com"
           />
         </div>
+        <ThemeSpacer size="elements" />
+
+        {/* Password input */}
         <div>
-          <label htmlFor="password">Enter password</label>
-          <input
+          <Label htmlFor="password">Password</Label>
+          <ThemeSpacer size="elements" />
+
+          <Input
             onChange={(e) => setPassword(e.target.value)}
             id="password"
             name="password"
@@ -65,7 +104,21 @@ export default function SignInForm() {
             value={password}
           />
         </div>
-        <button type="submit">Sign in</button>
+        <ThemeSpacer size="components" />
+
+        {/* Submit button */}
+        <Button type="submit" className="w-full">
+          Sign In
+        </Button>
+        <ThemeSpacer size="components" />
+
+        {/* Footer */}
+        <div className="text-center text-sm">
+          Don&apos;t have an account?{" "}
+          <Link href="/signup" className="underline underline-offset-4">
+            Sign up
+          </Link>
+        </div>
       </form>
 
       <div id="clerk-captcha" />

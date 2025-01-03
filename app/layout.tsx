@@ -29,12 +29,12 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`relative h-full w-full bg-gray-50 flex ${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`relative h-full w-full bg-gray-50 flex ${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
         >
           <DesktopSideBar />
           <div className="relative grow h-full bg-red-600x">
             <Header />
-            <div className="h-full w-full px-5 pt-10 bg-red-300x">
+            <div className="h-full w-full flex flex-col items-center justify-center bg-red-300x">
               {children}
             </div>
           </div>
