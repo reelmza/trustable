@@ -63,6 +63,14 @@ export default function SignInForm() {
         return;
       }
 
+      if (err?.status === 422) {
+        setError({
+          text: "Incorrect password entered.",
+          type: "form",
+        });
+        return;
+      }
+
       setError({
         text: "Something went wrong",
         type: "form",
@@ -88,7 +96,7 @@ export default function SignInForm() {
         <ThemeSpacer size="components" />
 
         {/* Google sign in */}
-        <GoogleButton />
+        <GoogleButton loadingParams={{ loading, setLoading }} />
         <ThemeSpacer size="components" />
 
         {/* "Or sign-in" with separator */}

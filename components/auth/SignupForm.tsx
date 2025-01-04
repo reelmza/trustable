@@ -12,23 +12,30 @@ import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "../ui/input-otp";
 
 export default function SignUpForm() {
   const { isLoaded, signUp, setActive } = useSignUp();
+  const router = useRouter();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
-  const [verifying, setVerifying] = useState(true);
 
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<{ type: string; text: string } | null>(
     null
   );
+
+  const [verifying, setVerifying] = useState(false);
   const [code, setCode] = useState("");
-  const router = useRouter();
 
   // Handle submission of the sign-up form
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,6 +43,7 @@ export default function SignUpForm() {
 
     if (!isLoaded) return;
 
+    setLoading("handleSubmit");
     // Start the sign-up process using the email and password provided
     try {
       await signUp.create({
@@ -53,10 +61,12 @@ export default function SignUpForm() {
       // Set 'verifying' true to display second form
       // and capture the OTP code
       setVerifying(true);
+      setLoading(null);
     } catch (err) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
+      setLoading(null);
     }
   };
 
@@ -66,6 +76,7 @@ export default function SignUpForm() {
 
     if (!isLoaded) return;
 
+    setLoading("handleVerify");
     try {
       // Use the code the user provided to attempt verification
       const signUpAttempt = await signUp.attemptEmailAddressVerification({
@@ -81,11 +92,13 @@ export default function SignUpForm() {
         // If the status is not complete, check why. User may need to
         // complete further steps.
         console.error(JSON.stringify(signUpAttempt, null, 2));
+        setLoading(null);
       }
     } catch (err) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
       console.error("Error:", JSON.stringify(err, null, 2));
+      setLoading(null);
     }
   };
 
@@ -98,19 +111,50 @@ export default function SignUpForm() {
           className="w-full bg-white border p-5 rounded-md lg:shadow-sm"
         >
           {/* Form heading */}
-          <h3 className="font-semibold text-xl text-center">Verify Email</h3>
+          <h3 className="font-semibold text-xl text-center">
+            Verify your Account
+          </h3>
           <ThemeSpacer size="elements" />
 
-          <input
-            value={code}
-            id="code"
-            name="code"
-            onChange={(e) => setCode(e.target.value)}
-          />
-
+          {/* Form description */}
+          <p className="text-gray-600 text-center text-sm">
+            Please enter the code sent to your email
+          </p>
           <ThemeSpacer size="components" />
-          <Button type="submit" className="w-full">
-            Verify
+
+          {/* OTP input */}
+          <div className="flex justify-center">
+            <InputOTP
+              maxLength={6}
+              value={code}
+              onChange={(value) => setCode(value)}
+            >
+              <InputOTPGroup>
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+              </InputOTPGroup>
+              <InputOTPSeparator />
+              <InputOTPGroup>
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
+          </div>
+          <ThemeSpacer size="components" />
+
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={loading === "handleVerify"}
+          >
+            {loading === "handleVerify" ? (
+              <Loader2 className="animate-spin" />
+            ) : (
+              ""
+            )}
+            Verify Account
           </Button>
         </form>
       </>
@@ -135,7 +179,7 @@ export default function SignUpForm() {
         <ThemeSpacer size="components" />
 
         {/* Google sign in */}
-        <GoogleButton />
+        <GoogleButton loadingParams={{ loading, setLoading }} />
         <ThemeSpacer size="components" />
 
         {/* "Or sign-in" with separator */}
@@ -222,7 +266,11 @@ export default function SignUpForm() {
         )}
 
         {/* Submit button */}
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={loading === "handleSubmit"}
+        >
           {loading === "handleSubmit" ? (
             <Loader2 className="animate-spin" />
           ) : (
