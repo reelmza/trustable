@@ -4,7 +4,7 @@ import ThemeSpacer from "@/components/layout/ThemeSpacer";
 
 const Signin = () => {
   return (
-    <div className="h-fit w-full lg:w-[25%] flex flex-col items-center justify-center">
+    <div className="h-fit w-full lg:w-[25%] flex flex-col items-center justify-center self-center mt-10">
       <Logo />
       <ThemeSpacer size="components" />
       <SignInForm />

@@ -7,7 +7,7 @@ const DesktopSideBar = () => {
   const path = usePathname();
 
   // Check if sidebar is needed
-  if (path === "/signin" || path === "/signout" || path === "/") {
+  if (path === "/signin" || path === "/signup" || path === "/") {
     return null;
   }
 

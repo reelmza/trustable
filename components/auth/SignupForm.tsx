@@ -3,12 +3,30 @@
 import { useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import ThemeSpacer from "../layout/ThemeSpacer";
+
+import GoogleButton from "./GoogleSignUp";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { Loader2 } from "lucide-react";
+import Link from "next/link";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
 
 export default function SignUpForm() {
   const { isLoaded, signUp, setActive } = useSignUp();
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
-  const [verifying, setVerifying] = useState(false);
+  const [verifying, setVerifying] = useState(true);
+
+  const [loading, setLoading] = useState<string | null>(null);
+  const [error, setError] = useState<{ type: string; text: string } | null>(
+    null
+  );
   const [code, setCode] = useState("");
   const router = useRouter();
 
@@ -21,8 +39,8 @@ export default function SignUpForm() {
     // Start the sign-up process using the email and password provided
     try {
       await signUp.create({
-        firstName: "Jesse",
-        lastName: "Moses",
+        firstName,
+        lastName,
         emailAddress,
         password,
       });
@@ -75,16 +93,25 @@ export default function SignUpForm() {
   if (verifying) {
     return (
       <>
-        <h1>Verify your email</h1>
-        <form onSubmit={handleVerify}>
-          <label id="code">Enter your verification code</label>
+        <form
+          onSubmit={handleVerify}
+          className="w-full bg-white border p-5 rounded-md lg:shadow-sm"
+        >
+          {/* Form heading */}
+          <h3 className="font-semibold text-xl text-center">Verify Email</h3>
+          <ThemeSpacer size="elements" />
+
           <input
             value={code}
             id="code"
             name="code"
             onChange={(e) => setCode(e.target.value)}
           />
-          <button type="submit">Verify</button>
+
+          <ThemeSpacer size="components" />
+          <Button type="submit" className="w-full">
+            Verify
+          </Button>
         </form>
       </>
     );
@@ -93,31 +120,124 @@ export default function SignUpForm() {
   // Display the initial sign-up form to capture the email and password
   return (
     <>
-      <h1>Sign up</h1> <br />
-      <form onSubmit={handleSubmit} className="border">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full bg-white border p-5 rounded-md lg:shadow-sm"
+      >
+        {/* Form heading */}
+        <h3 className="font-semibold text-xl text-center">Create an Account</h3>
+        <ThemeSpacer size="elements" />
+
+        {/* Form description */}
+        <p className="text-gray-600 text-center text-sm">
+          You can signup with your social account
+        </p>
+        <ThemeSpacer size="components" />
+
+        {/* Google sign in */}
+        <GoogleButton />
+        <ThemeSpacer size="components" />
+
+        {/* "Or sign-in" with separator */}
+        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+          <span className="relative z-10 bg-white text-gray-600 px-2">
+            Or register account
+          </span>
+        </div>
+        <ThemeSpacer size="components" />
+
+        {/* Name inputs */}
+        <div className="w-full flex flex-wrap lg:flex-nowrap items-center justify-between gap-2">
+          {/* First Name */}
+          <div className="w-full lg:w-[50%]">
+            <Label htmlFor="firstName">First Name</Label>
+            <ThemeSpacer size="elements" />
+
+            <Input
+              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full"
+              id="firstName"
+              name="firstName"
+              type="text"
+              placeholder="Moses"
+              required
+            />
+          </div>
+
+          {/* Last Name */}
+          <div className="w-full lg:w-[50%]">
+            <Label htmlFor="lastName">Last Name</Label>
+            <ThemeSpacer size="elements" />
+
+            <Input
+              onChange={(e) => setLastName(e.target.value)}
+              className="w-full"
+              id="lastName"
+              name="lastName"
+              type="text"
+              placeholder="Kwagga"
+              required
+            />
+          </div>
+        </div>
+        <ThemeSpacer size="elements" />
+
+        {/* Email input */}
         <div>
-          <label htmlFor="email">Enter email address</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={emailAddress}
+          <Label htmlFor="email">Email</Label>
+          <ThemeSpacer size="elements" />
+
+          <Input
             onChange={(e) => setEmailAddress(e.target.value)}
+            id="email"
+            name="email"
+            type="email"
+            value={emailAddress}
+            placeholder="you@gmail.com"
+            required
           />
         </div>
+        <ThemeSpacer size="elements" />
+
+        {/* Password input */}
         <div>
-          <label htmlFor="password">Enter password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={password}
+          <Label htmlFor="password">Password</Label>
+          <ThemeSpacer size="elements" />
+
+          <Input
             onChange={(e) => setPassword(e.target.value)}
+            id="password"
+            name="password"
+            type="password"
+            value={password}
+            required
           />
         </div>
 
-        <div>
-          <button type="submit">Continue</button>
+        {/* Error Box */}
+        {error?.type === "form" ? (
+          <div className="my-2 text-red-600 text-sm">{error?.text}</div>
+        ) : (
+          <ThemeSpacer size="components" />
+        )}
+
+        {/* Submit button */}
+        <Button type="submit" className="w-full">
+          {loading === "handleSubmit" ? (
+            <Loader2 className="animate-spin" />
+          ) : (
+            ""
+          )}
+          Sign In
+        </Button>
+        <ThemeSpacer size="components" />
+
+        {/* Footer */}
+        <div className="text-center text-sm">
+          Already have an account?{" "}
+          <Link href="/signin" className="underline underline-offset-4">
+            Sign in
+          </Link>
         </div>
       </form>
       <div id="clerk-captcha" />

@@ -34,7 +34,7 @@ export default function RootLayout({
           <DesktopSideBar />
           <div className="relative grow h-full bg-red-600x">
             <Header />
-            <div className="h-full w-full flex flex-col items-center justify-center bg-red-300x">
+            <div className="h-full w-full flex flex-col items-centder justify-start">
               {children}
             </div>
           </div>
