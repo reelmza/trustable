@@ -6,12 +6,16 @@ import Logo from "../icons/Logo";
 import ThemeSpacer from "./ThemeSpacer";
 import {
   BookOpenCheck,
+  CircleHelp,
   CreditCard,
+  Headset,
   LayoutDashboard,
   LucideLayoutDashboard,
+  Settings,
   User,
 } from "lucide-react";
 import { Button } from "../ui/button";
+import { Label } from "../ui/label";
 
 const DesktopSideBar = () => {
   const path = usePathname();
@@ -43,7 +47,7 @@ const DesktopSideBar = () => {
         <div className="flex flex-col text-gray-800 text-sm">
           {/* Dashboard */}
           <Link href={"/dashboard"}>
-            <div className="flex items-center bg-gray-100 h-8 px-3 rounded-sm font-semibold gap-2">
+            <div className="flex items-center bg-gray-100 h-8 px-3 rounded-sm gap-2">
               <LayoutDashboard size={20} strokeWidth={1.5} />
               <span>Dashboard</span>
             </div>
@@ -72,13 +76,46 @@ const DesktopSideBar = () => {
               <span>Payment & Billing</span>
             </div>
           </Link>
+          <ThemeSpacer size="elements" />
+
+          <Link href={"/settings"}>
+            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+              <Settings size={20} strokeWidth={1.5} />
+              <span>Settings</span>
+            </div>
+          </Link>
+        </div>
+        <ThemeSpacer size="components" />
+
+        {/* Siebar support menus */}
+        <div className="flex flex-col text-gray-800 text-sm">
+          <Label className="font-normal">Help and contact</Label>
+          <ThemeSpacer size="components" />
+          {/* Dashboard */}
+          <Link href={"/support"}>
+            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+              <Headset size={20} strokeWidth={1.5} />
+              <span>Customer Support</span>
+            </div>
+          </Link>
+          <ThemeSpacer size="elements" />
+
+          <Link href={"/guides"}>
+            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+              <CircleHelp size={20} strokeWidth={1.5} />
+              <span>Usage guides</span>
+            </div>
+          </Link>
+          <ThemeSpacer size="elements" />
         </div>
         <ThemeSpacer size="components" />
 
         {/* Sidebar footer */}
         <div className="">
           <SignOutButton redirectUrl="/signin">
-            <Button className="w-full">Sign out</Button>
+            <Button className="w-full" variant={"ghost"}>
+              Sign out
+            </Button>
           </SignOutButton>
         </div>
       </div>
