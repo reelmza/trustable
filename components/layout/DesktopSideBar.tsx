@@ -2,6 +2,16 @@
 import { SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Logo from "../icons/Logo";
+import ThemeSpacer from "./ThemeSpacer";
+import {
+  BookOpenCheck,
+  CreditCard,
+  LayoutDashboard,
+  LucideLayoutDashboard,
+  User,
+} from "lucide-react";
+import { Button } from "../ui/button";
 
 const DesktopSideBar = () => {
   const path = usePathname();
@@ -23,22 +33,57 @@ const DesktopSideBar = () => {
       <div
         className={`fixed flex flex-col top-0 left-0 w-[18%] h-full border-r p-5`}
       >
-        <h3>SideBar</h3>
+        {/* Sidebar logo */}
+        <div>
+          <Logo />
+        </div>
+        <ThemeSpacer size="components" />
 
-        <br />
-        <br />
+        {/* Sidebar menus */}
+        <div className="flex flex-col text-gray-800 text-sm">
+          {/* Dashboard */}
+          <Link href={"/dashboard"}>
+            <div className="flex items-center bg-gray-100 h-8 px-3 rounded-sm font-semibold gap-2">
+              <LayoutDashboard size={20} strokeWidth={1.5} />
+              <span>Dashboard</span>
+            </div>
+          </Link>
+          <ThemeSpacer size="elements" />
 
-        <Link href={"/dashboard"}>Dashboard</Link>
-        <Link href={"/profile"}>Profile</Link>
-        <Link href={"/create-trust"}>Trusts</Link>
-        <Link href={"/payments"}>Paymnet & Billing</Link>
+          <Link href={"/profile"}>
+            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+              <User size={20} strokeWidth={1.5} />
+              <span>Profile</span>
+            </div>
+          </Link>
+          <ThemeSpacer size="elements" />
 
-        <br />
-        <br />
-        <SignOutButton redirectUrl="/signin" />
+          <Link href={"/create-trust"}>
+            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+              <BookOpenCheck size={16} strokeWidth={1.5} />
+              <span>Trusts</span>
+            </div>
+          </Link>
+          <ThemeSpacer size="elements" />
+
+          <Link href={"/payments"}>
+            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+              <CreditCard size={20} strokeWidth={1.5} />
+              <span>Payment & Billing</span>
+            </div>
+          </Link>
+        </div>
+        <ThemeSpacer size="components" />
+
+        {/* Sidebar footer */}
+        <div className="">
+          <SignOutButton redirectUrl="/signin">
+            <Button className="w-full">Sign out</Button>
+          </SignOutButton>
+        </div>
       </div>
 
-      {/* Underlay */}
+      {/* Underlay - ignore this element */}
       <div className={`w-[18%] h-full`}></div>
     </div>
   );
