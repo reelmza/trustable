@@ -47,7 +47,13 @@ const DesktopSideBar = () => {
         <div className="flex flex-col text-gray-800 text-sm">
           {/* Dashboard */}
           <Link href={"/dashboard"}>
-            <div className="flex items-center bg-gray-100 h-8 px-3 rounded-sm gap-2">
+            <div
+              className={`flex items-center ${
+                path.includes("/dashboard")
+                  ? "bg-gray-100"
+                  : "hover:bg-gray-100"
+              } h-8 px-3 rounded-sm gap-2`}
+            >
               <LayoutDashboard size={20} strokeWidth={1.5} />
               <span>Dashboard</span>
             </div>
@@ -55,7 +61,11 @@ const DesktopSideBar = () => {
           <ThemeSpacer size="elements" />
 
           <Link href={"/profile"}>
-            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+            <div
+              className={`flex items-center ${
+                path.includes("/profile") ? "bg-gray-100" : "hover:bg-gray-100"
+              } h-8 px-3 rounded-sm gap-2`}
+            >
               <User size={20} strokeWidth={1.5} />
               <span>Profile</span>
             </div>
@@ -63,7 +73,13 @@ const DesktopSideBar = () => {
           <ThemeSpacer size="elements" />
 
           <Link href={"/create-trust"}>
-            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+            <div
+              className={`flex items-center ${
+                path.includes("/create-trust")
+                  ? "bg-gray-100"
+                  : "hover:bg-gray-100"
+              } h-8 px-3 rounded-sm gap-2`}
+            >
               <BookOpenCheck size={16} strokeWidth={1.5} />
               <span>Trusts</span>
             </div>
@@ -71,7 +87,11 @@ const DesktopSideBar = () => {
           <ThemeSpacer size="elements" />
 
           <Link href={"/payments"}>
-            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+            <div
+              className={`flex items-center ${
+                path.includes("/payment") ? "bg-gray-100" : "hover:bg-gray-100"
+              } h-8 px-3 rounded-sm gap-2`}
+            >
               <CreditCard size={20} strokeWidth={1.5} />
               <span>Payment & Billing</span>
             </div>
@@ -79,7 +99,11 @@ const DesktopSideBar = () => {
           <ThemeSpacer size="elements" />
 
           <Link href={"/settings"}>
-            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+            <div
+              className={`flex items-center ${
+                path.includes("/settings") ? "bg-gray-100" : "hover:bg-gray-100"
+              } h-8 px-3 rounded-sm gap-2`}
+            >
               <Settings size={20} strokeWidth={1.5} />
               <span>Settings</span>
             </div>
@@ -93,7 +117,11 @@ const DesktopSideBar = () => {
           <ThemeSpacer size="components" />
           {/* Dashboard */}
           <Link href={"/support"}>
-            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+            <div
+              className={`flex items-center ${
+                path.includes("/support") ? "bg-gray-100" : "hover:bg-gray-100"
+              } h-8 px-3 rounded-sm gap-2`}
+            >
               <Headset size={20} strokeWidth={1.5} />
               <span>Customer Support</span>
             </div>
@@ -101,7 +129,11 @@ const DesktopSideBar = () => {
           <ThemeSpacer size="elements" />
 
           <Link href={"/guides"}>
-            <div className="flex items-center hover:bg-gray-100 h-8 px-3 rounded-sm gap-2">
+            <div
+              className={`flex items-center ${
+                path.includes("/guides") ? "bg-gray-100" : "hover:bg-gray-100"
+              } h-8 px-3 rounded-sm gap-2`}
+            >
               <CircleHelp size={20} strokeWidth={1.5} />
               <span>Usage guides</span>
             </div>
