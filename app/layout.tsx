@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import DesktopSideBar from "@/components/layout/DesktopSideBar";
 import Header from "@/components/layout/Header";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
             <Header />
             <div className="h-full w-full flex flex-col items-centder justify-start">
               {children}
+              <Toaster />
             </div>
           </div>
         </body>

@@ -12,7 +12,9 @@ const Header = () => {
   ) {
     return null;
   }
-  return <div className="sticky top-0 left-0 p-5 border-b">Home Page</div>;
+  return (
+    <div className="sticky top-0 left-0 p-5 border-b bg-gray-50">Home Page</div>
+  );
 };
 
 export default Header;

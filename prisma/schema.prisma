@@ -13,6 +13,7 @@ model trust {
   trustDescription String
   trustFileHash    String
   trustFileLink    String?
+  isPublic         Boolean
 
   trustedPartyName      String?
   trustedPartySignature String?

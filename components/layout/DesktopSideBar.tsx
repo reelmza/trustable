@@ -44,7 +44,7 @@ const DesktopSideBar = () => {
         <ThemeSpacer size="components" />
 
         {/* Sidebar menus */}
-        <div className="flex flex-col text-gray-800 text-sm">
+        <div className="flex flex-col text-gray-900 text-sm">
           {/* Dashboard */}
           <Link href={"/dashboard"}>
             <div
@@ -72,12 +72,10 @@ const DesktopSideBar = () => {
           </Link>
           <ThemeSpacer size="elements" />
 
-          <Link href={"/create-trust"}>
+          <Link href={"/trust"}>
             <div
               className={`flex items-center ${
-                path.includes("/create-trust")
-                  ? "bg-gray-100"
-                  : "hover:bg-gray-100"
+                path.includes("/trust") ? "bg-gray-100" : "hover:bg-gray-100"
               } h-8 px-3 rounded-sm gap-2`}
             >
               <BookOpenCheck size={16} strokeWidth={1.5} />
@@ -111,9 +109,9 @@ const DesktopSideBar = () => {
         </div>
         <ThemeSpacer size="components" />
 
-        {/* Siebar support menus */}
-        <div className="flex flex-col text-gray-800 text-sm">
-          <Label className="font-normal">Help and contact</Label>
+        {/* Sidebar support menus */}
+        <div className="flex flex-col text-gray-900 text-sm">
+          <Label className="font-semibold">Help and contact</Label>
           <ThemeSpacer size="components" />
           {/* Dashboard */}
           <Link href={"/support"}>
