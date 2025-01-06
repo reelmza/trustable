@@ -98,11 +98,14 @@ const CreateTrustForm = () => {
 
                   // If file size is > 10mb
                   if (fileSize > 10) {
-                    e.target.value = "";
                     toast({
                       description: "File size too large",
                       variant: "destructive",
+                      duration: 1000,
                     });
+
+                    e.target.value = "";
+
                     return [0, prev[1]];
                   }
 
