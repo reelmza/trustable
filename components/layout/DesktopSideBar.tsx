@@ -32,10 +32,10 @@ const DesktopSideBar = () => {
 
   // Render Sidebar
   return (
-    <div className="w-[18%] h-full hidden lg:block">
+    <div className="w-[20%] h-full hidden lg:block shadow-inner">
       {/* Fixed Overlay */}
       <div
-        className={`fixed flex flex-col top-0 left-0 w-[18%] h-full border-r p-5`}
+        className={`fixed flex flex-col top-0 left-0 w-[20%] h-full border-r p-5`}
       >
         {/* Sidebar logo */}
         <div>
@@ -151,7 +151,7 @@ const DesktopSideBar = () => {
       </div>
 
       {/* Underlay - ignore this element */}
-      <div className={`w-[18%] h-full`}></div>
+      <div className={`w-[20%] h-full`}></div>
     </div>
   );
 };

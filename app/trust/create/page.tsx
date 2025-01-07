@@ -3,7 +3,7 @@ import React from "react";
 
 const CreateTrust = () => {
   return (
-    <div className="p-5">
+    <div className="p-5 bg-white">
       <CreateTrustForm />
     </div>
   );

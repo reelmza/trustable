@@ -13,7 +13,7 @@ const Header = () => {
     return null;
   }
   return (
-    <div className="sticky top-0 left-0 p-5 border-b bg-gray-50">Home Page</div>
+    <div className="sticky top-0 left-0 p-5 border-b bg-white">Home Page</div>
   );
 };
 

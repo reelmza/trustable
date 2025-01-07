@@ -33,7 +33,7 @@ export default function RootLayout({
           className={`relative h-full w-full bg-gray-50 flex ${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
         >
           <DesktopSideBar />
-          <div className="relative grow h-full bg-red-600x">
+          <div className="relative grow h-full bg-white">
             <Header />
             <div className="h-full w-full flex flex-col items-centder justify-start">
               {children}
